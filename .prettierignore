@@ -1,0 +1,4 @@
+# Ignore markdown:
+*.md
+**/node_modules/**
+.jest.config.js

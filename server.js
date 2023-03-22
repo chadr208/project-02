@@ -17,7 +17,7 @@ const PORT = process.env.PORT || 3001;
 
 // GET Route for Homepage, '/' is the default filepath
 app.get('/', (req, res) => 
-  //The response for sending a get request to the homepage is to receive our index.html file
+  // The response for sending a get request to the homepage is to receive our index.html file
   res.sendFile(path.join(__dirname, '/public/index.html')));
 
  

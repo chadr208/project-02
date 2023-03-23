@@ -40,26 +40,19 @@ User.init(
  {
     hooks: {
         // Bcrypt hashes the incoming password on new users.
-        beforeCreate: async (NewUserData) => {
-            const hashedPassword = await bcrypt.hash(NewUserData.password, 10);
-            console.log(hashedPassword)
-            return {
-                ...NewUserData,
-                password: hashedPassword,
-            }
+        beforeCreate: async (newUserData) => {
+          
+            const hashedPassword = await bcrypt.hash(newUserData.password, 10);
+            newUserData.password = hashedPassword // eslint-disable-line no-param-reassign
+            return newUserData
         },
-        beforeUpdate: async (updateUserData) => {
+        beforeUpdate: async (updatedUserData) => {
+          
             const hashedPassword = await bcrypt.hash(updatedUserData.password, 10);
-            return {
-                ...updatedUserData,
-                password: hashedPassword,
+            updatedUserData.password = hashedPassword // eslint-disable-line no-param-reassign
+            return updatedUserData
             }
         },
-    }
-
- }
-
-    {
         sequelize,
         timestamps: false,
         freezeTableName: true,

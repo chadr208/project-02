@@ -1,6 +1,8 @@
-import { Model, DataTypes } from "sequelize";
-import bcrypt from "bcrypt";
+const { Model, DataTypes } = require('sequelize');
+const bcrypt = require('bcrypt');
+const sequelize = require('../config/connection');
 
+// Method to check the user password
 class User extends Model {
   checkPassword(loginPw) {
     return bcrypt.compareSync(loginPw, this.password);
@@ -15,7 +17,7 @@ User.init(
       primaryKey: true,
       autoIncrement: true,
     },
-    name: {
+    username: {
       type: DataTypes.STRING,
       allowNull: false,
     },
@@ -31,27 +33,39 @@ User.init(
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
-        len: [10],
+        len: [5, 15],
       },
     },
   },
-  {
+ {
     hooks: {
-      beforeCreate: async (newUserData) => {
-        newUserData.password = await bcrypt.hash(newUserData.password, 10);
-        return newUserData;
-      },
-      beforeUpdate: async (updatedUserData) => {
-        updatedUserData.password = await bcrypt.hash(updatedUserData.password, 10);
-        return updatedUserData;
-      },
+        // Bcrypt hashes the incoming password on new users.
+        beforeCreate: async (NewUserData) => {
+            const hashedPassword = await bcrypt.hash(NewUserData.password, 10);
+            console.log(hashedPassword)
+            return {
+                ...NewUserData,
+                password: hashedPassword,
+            }
+        },
+        beforeUpdate: async (updateUserData) => {
+            const hashedPassword = await bcrypt.hash(updatedUserData.password, 10);
+            return {
+                ...updatedUserData,
+                password: hashedPassword,
+            }
+        },
+    }
+
+ }
+
+    {
+        sequelize,
+        timestamps: false,
+        freezeTableName: true,
+        underscored: true,
+        modelName: 'user',
     },
-    sequelize,
-    timestamps: false,
-    freezeTableName: true,
-    underscored: true,
-    modelName: 'user',
-  }
 );
 
 module.exports = User;

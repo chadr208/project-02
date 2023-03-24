@@ -4,6 +4,7 @@
     "main": "server.js",
     "license": "MIT",
     "dependencies": {
+        "api": "^5.0.8",
         "bcrypt": "^5.1.0",
         "dotenv": "^16.0.3",
         "express": "^4.17.1",

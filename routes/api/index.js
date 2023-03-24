@@ -1,8 +1,10 @@
 const apiRouter = require('express').Router();
 const userRouter = require('./userroutes');
+const restaurantRouter = require('./resturantroutes');
 const { User } = require('../../models');
 
 apiRouter.use('/users', userRouter);
+apiRouter.use('/restaurants', restaurantRouter);
 
 apiRouter.post('/login', async (req, res) => {
   try {

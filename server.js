@@ -8,6 +8,7 @@ const path = require('path');
 // Defining express as a top-level function to be re-used each time a request is made or the port is being listened to
 const app = express();
 const sequelize = require('./config/connection');
+const routes = require('./routes')
 
 
 // Sets the PORT variable to either the value of the PORT environment variable, if it is set, or 3001 if it is not set. 
@@ -15,7 +16,7 @@ const sequelize = require('./config/connection');
 const PORT = process.env.PORT || 3001;
 
 // Initialize server
-
+app.use(routes)
 // GET Route for Homepage, '/' is the default filepath
 app.get('/', (req, res) => 
   // The response for sending a get request to the homepage is to receive our index.html file

@@ -7,6 +7,7 @@ const path = require('path');
 // Define Variables 
 // Defining express as a top-level function to be re-used each time a request is made or the port is being listened to
 const app = express();
+const sequelize = require('./config/connection');
 
 
 // Sets the PORT variable to either the value of the PORT environment variable, if it is set, or 3001 if it is not set. 

@@ -5,6 +5,7 @@
     "license": "MIT",
     "dependencies": {
         "bcrypt": "^5.1.0",
+        "dotenv": "^16.0.3",
         "express": "^4.17.1",
         "sequelize": "^6.29.3"
     },

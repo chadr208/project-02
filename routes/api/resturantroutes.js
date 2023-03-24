@@ -1,14 +1,13 @@
 const express = require('express');
 
 const router = express.Router();
-
-const db = require('../../models');
-
 const sdk = require('api')('@yelp-developers/v1.0#deudoolf6o9f51');
+
+
 // GET /food/search?query=:query&location=:location
 router.get('/search', async (req, res) => {
   try {
-    const { query, location } = req.query;
+    // const { query, location } = req.query;
    
 
     sdk.auth('Bearer rIlRo2Z3djEtgTLsWff7db1cLfiVpo5_SooNu_3h95PDpHSXuAn9m59ZaTQh_i8v_B4GnFdxLEANjuHDjV6HTKOoWjhAcSKAxhWgWR8czVTr1680pkuvNJ6j3egdZHYx');

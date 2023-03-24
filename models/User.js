@@ -40,7 +40,8 @@ User.init(
  {
     hooks: {
         // Bcrypt hashes the incoming password on new users.
-        beforeCreate: async (NewUserData) => {
+        beforeCreate: async (NewUserData) => 
+        {
             const hashedPassword = await bcrypt.hash(NewUserData.password, 10);
             console.log(hashedPassword)
             return {
@@ -48,16 +49,17 @@ User.init(
                 password: hashedPassword,
             }
         },
-        beforeUpdate: async (updateUserData) => {
+        beforeUpdate: async (updateUserData) => 
+        {
             const hashedPassword = await bcrypt.hash(updatedUserData.password, 10);
             return {
                 ...updatedUserData,
                 password: hashedPassword,
             }
         },
-    }
+    },
 
- }
+ },
 
     {
         sequelize,

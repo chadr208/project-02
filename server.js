@@ -8,6 +8,13 @@ const path = require('path');
 // Defining express as a top-level function to be re-used each time a request is made or the port is being listened to
 const app = express();
 
+// import handlebar
+const exphbs = require('express-handlebars');
+const hbs = exphbs.create({});
+
+// configure handlebar as rendering engine
+app.engine('handlebars', hbs.engine);
+app.set('view engine', 'handlebars');
 
 // Sets the PORT variable to either the value of the PORT environment variable, if it is set, or 3001 if it is not set. 
 // This is useful when deploying the application to a hosting platform, as the hosting platform may specify the port that the application should listen on through an environment variable.

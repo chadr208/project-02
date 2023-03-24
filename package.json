@@ -5,7 +5,9 @@
     "license": "MIT",
     "dependencies": {
         "bcrypt": "^5.1.0",
+        "dotenv": "^16.0.3",
         "express": "^4.17.1",
+        "mysql2": "^3.2.0",
         "sequelize": "^6.29.3"
     },
     "devDependencies": {
@@ -22,6 +24,7 @@
         "prepare": "husky install",
         "test": "eslint --ext .js ./",
         "watch": "nodemon server",
-        "seed": "node seeds/seed.js"
+        "seed": "node seeds/seed.js",
+        "start": "node server"
     }
 }

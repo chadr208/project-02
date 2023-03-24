@@ -12,7 +12,7 @@ const sequelize = require('./config/connection');
 
 // Sets the PORT variable to either the value of the PORT environment variable, if it is set, or 3001 if it is not set. 
 // This is useful when deploying the application to a hosting platform, as the hosting platform may specify the port that the application should listen on through an environment variable.
- PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3001;
 
 // Initialize server
 
@@ -24,7 +24,7 @@ app.get('/', (req, res) =>
  
 // When this file is ran, express listens for connections to our designated port address, and returns a node http.Server with this application as its callback
 sequelize.sync({force:false}).then(() => {
-app.listen(PORT, () =>
-  console.log(`Example app listening at http://localhost:${PORT}`)
-);
+  app.listen(PORT, () =>
+    console.log(`Example app listening at http://localhost:${PORT}`)
+  );
 })

@@ -4,6 +4,8 @@ const express = require('express');
 // Provides utilities for working with file and directory paths
 // const path = require('path');
 
+const session = require('express-session');
+
 const { engine } = require('express-handlebars');
 
 // Define Variables 
@@ -17,12 +19,47 @@ const routes = require('./routes')
 // This is useful when deploying the application to a hosting platform, as the hosting platform may specify the port that the application should listen on through an environment variable.
 const PORT = process.env.PORT || 3001;
 
+const sess = {
+  secret: 'Super secret secret',
+  cookie: {},
+  resave: false,
+  saveUninitialized: true,
+  // store: new SequelizeStore({
+  //   db: sequelize
+  // })
+};
+
+app.use(session(sess));
+
 app.engine('handlebars', engine());
 app.set('view engine', 'handlebars');
 app.set('views', './views');
 
 app.get('/', (req, res) => {
+  if (!req.session.logged_in) {
+    res.redirect('/login');
+    return;
+  }
   res.render('home');
+});
+
+app.get('/login', (req, res) => {
+
+  if (req.session.logged_in) {
+    res.redirect('/');
+    return;
+  }
+  res.render('login');
+});
+
+app.get('/signup', (req, res) => {
+
+  if (req.session.logged_in) {
+    res.redirect('/');
+    return;
+  }
+
+  res.render('signup');
 });
 
 // Initialize server

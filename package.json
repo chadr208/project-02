@@ -27,6 +27,6 @@
         "test": "eslint --ext .js ./",
         "watch": "nodemon server",
         "seed": "node seeds/seed.js",
-        "start": "node server"
+        "start": "nodemon server"
     }
 }

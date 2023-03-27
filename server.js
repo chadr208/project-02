@@ -2,7 +2,7 @@
 // Provides functions to send and recieve server requests on the designated port
 const express = require('express');
 // Provides utilities for working with file and directory paths
-const path = require('path');
+// const path = require('path');
 
 const { engine } = require('express-handlebars');
 

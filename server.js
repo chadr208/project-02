@@ -22,6 +22,9 @@ app.get('/', (req, res) =>
   // The response for sending a get request to the homepage is to receive our index.html file
   res.sendFile(path.join(__dirname, '/public/index.html')));
 
+app.get('/', (req, res) => {
+  res.render('index', { title: 'EZ Restaurant'})
+})
  
 // When this file is ran, express listens for connections to our designated port address, and returns a node http.Server with this application as its callback
 sequelize.sync({force:false}).then(() => {

@@ -30,12 +30,15 @@ const sess = {
 };
 
 app.use(session(sess));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 app.engine('handlebars', engine());
 app.set('view engine', 'handlebars');
 app.set('views', './views');
 
 app.get('/', (req, res) => {
+  console.log(req.session)
   if (!req.session.logged_in) {
     res.redirect('/login');
     return;

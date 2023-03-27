@@ -8,6 +8,7 @@ apiRouter.use('/restaurants', restaurantRouter);
 
 apiRouter.post('/login', async (req, res) => {
   try {
+    
     const { username, password } = req.body;
 
     if (!username || !password) {
@@ -22,7 +23,7 @@ apiRouter.post('/login', async (req, res) => {
 
     const user = userData.get({ plain: true });
 
-    if (password !== user.password) {
+    if (!userData.checkPassword(password)) {
       return res.status(400).json({ message: 'password does not match' });
     }
 
@@ -33,9 +34,12 @@ apiRouter.post('/login', async (req, res) => {
         email: user.email,
       };
 
-      return res.json({
-        message: `${username} successfully logged in and session user is ${req.session.user.username}`,
-      });
+      req.session.logged_in = true;
+
+      return res.redirect('/');
+      // return res.json({
+      //   message: `${username} successfully logged in and session user is ${req.session.user.username}`,
+      // });
     });
 
     return 0;
